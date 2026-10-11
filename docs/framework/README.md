@@ -62,4 +62,4 @@ The framework is built and changed through pull requests, like any other code:
 1. **Proposal PR:** a stage file (or a change to one) plus its entries in `docs/decisions.md`. Approved by the roles the change affects. This agrees *what* the rule is.
 2. **Implementation PR:** the agents, skills, scripts and CI that put the approved proposal into practice. Approved by the AI QE Lead and a QE Engineer. This checks the *how* matches the proposal.
 
-Only the roles a change affects are asked to approve it. Until the automated approval check exists, approvals are recorded as PR reviews.
+Only the roles a change affects are asked to approve it. Until the automated approval check exists, each required role approves with a PR comment `Approved as <role>` (e.g. `Approved as Tech Lead`), and the PR is merged only after every required role has commented. This is recorded but not enforced; GitHub reviews replace it when the team has separate accounts.

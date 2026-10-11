@@ -2,7 +2,7 @@
 
 Why this repo is built the way it is. Read this before changing the framework or building a stage.
 
-Each entry says what was decided and why, with the PR that made it. Add new decisions at the end, numbered, through the same PR as the change they explain. A decision that replaces an earlier one says so, and the earlier one is marked **Superseded by #N** instead of being deleted.
+Each entry says what was decided and why, with the PR that made it. Add new decisions at the end, numbered, through the same PR as the change they explain. A decision that replaces an earlier one says so, and the earlier one is marked **Superseded by decision N** and struck through instead of being deleted.
 
 The previous build of this framework (repo `lucaram/ai-qe-loop`, Stages 1–3) is a reference, not a source: its choices are reconsidered stage by stage here and recorded below when adopted.
 
@@ -51,11 +51,21 @@ The previous build of this framework (repo `lucaram/ai-qe-loop`, Stages 1–3) i
 
 ## Stage 1: Versioned context (proposal)
 
-17. **Context is a pinned snapshot.** Each source is pulled into its `context/` folder, and `context/manifest.json` records a sha256 per file. Every run uses a known version, and any change is a reviewable PR. (#7)
+17. **Superseded by decision 25.** ~~**Context is a pinned snapshot.** Each source is pulled into its `context/` folder, and `context/manifest.json` records a sha256 per file. Every run uses a known version, and any change is a reviewable PR. (#7)~~
 18. **Hashes are taken over LF-normalised content**, so a file hashes the same on Windows and Linux. (#7)
-19. **`context/` changes only through a pull PR.** A pull also overwrites hand-edited files whose content no longer matches the manifest, so the snapshot cannot drift silently. (#7)
-20. **A stand-in source folder replaces the real systems until connectors exist.** The pull, pin and approval logic is the same either way; each source switches to a real connector when access exists. (#7)
-21. **A pull PR lists the impact:** the existing plans and tests that mention the changed stories or rules, so approvers see what a context change will affect. (#7)
+19. **Superseded by decision 25.** ~~**`context/` changes only through a pull PR.** A pull also overwrites hand-edited files whose content no longer matches the manifest, so the snapshot cannot drift silently. (#7)~~
+20. **Superseded by decision 25.** ~~**A stand-in source folder replaces the real systems until connectors exist.** The pull, pin and approval logic is the same either way; each source switches to a real connector when access exists. (#7)~~
+21. **Superseded by decision 25.** ~~**A pull PR lists the impact:** the existing plans and tests that mention the changed stories or rules, so approvers see what a context change will affect. (#7)~~
 22. **Agent evals are a known gap.** The Stage 1 gate says agent evals must pass before agent rules or skills change; until they exist, those changes are approved by review only. (#7)
 23. **The AI QE Lead owns `context/history/`, and history never defines expected behaviour.** It guides risk and focus only; requirement gaps found in incidents go to the Product Owner as story or business-rule changes. Otherwise expected behaviour could change without the Product Owner's approval. ([answer on #7](https://github.com/lucaram/Experiment-3/pull/7#issuecomment-6107354864), #8)
 24. **Code-generation instructions are defined in the Stage 2 proposal**, where coding agents first appear. Defining them now would be a rule with nothing to apply to (decision 15). ([answer on #7](https://github.com/lucaram/Experiment-3/pull/7#issuecomment-6107354864), #8)
+
+## Stage 1 amendment: read live, pin the version
+
+25. **Context is read live from its source and the version used is pinned; it is not copied by default.** Supersedes 17, 19, 20 and 21. A full copy duplicates data, lags behind the source, and in a public repo would leak company requirements. What a copy really gave was reproducibility and approval, and a version reference gives both. (#9)
+26. **Each source records the version its tool offers:** Azure DevOps revision number, Confluence page version, git commit, and for Jira (which has no version number) the `updated` timestamp plus a content fingerprint. (#9)
+27. **A copy is made only when the tool cannot return an old version** (e.g. Jira), and only into a private repo or store. (#9)
+28. **Owners approve in the tool they already use** (e.g. story status Approved), or by PR for sources kept in git. The lock records which approved version was used; a check will refuse unapproved versions (built with Stage 3). (#9)
+29. **The company's source systems are not chosen yet.** Each source gets its own adapter, so Jira, Azure DevOps or Confluence can be plugged in without changing the rest of Stage 1. (#9)
+30. **The stand-in `sources/` folder is versioned by git commit**, so it behaves like a git-based source until real adapters exist. (#9)
+31. **Changing an approved proposal needs a proposal amendment PR**, approved by the same roles as the original, before anything is built on it. (#9)

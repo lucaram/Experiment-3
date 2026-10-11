@@ -48,3 +48,12 @@ The previous build of this framework (repo `lucaram/ai-qe-loop`, Stages 1–3) i
 14. **Agent rules live in `AGENTS.md`**, the cross-tool standard, so the same rules apply whatever AI tool is used. `CLAUDE.md` contains only `@AGENTS.md`, which makes Claude Code load it. Neither file has `name`/`description` frontmatter: that format is for skills and subagents, which a tool chooses between; these files are always loaded. (#4)
 15. **`AGENTS.md` holds only rules that apply now.** Each stage's implementation PR adds that stage's rules (e.g. test tags, what a test-fixing agent may change), so the file never describes something that does not exist yet. (#4)
 16. **Agent rules are instructions, not controls, until checks back them.** Today only "never push to `main`" is enforced, by branch protection. An agent could still merge a PR or post an `Approved as` comment, because it uses the owner's GitHub login. Planned controls: the approval check (Stage 3) and a separate GitHub identity for agents with no merge rights. (#4)
+
+## Stage 1: Versioned context (proposal)
+
+17. **Context is a pinned snapshot.** Each source is pulled into its `context/` folder, and `context/manifest.json` records a sha256 per file. Every run uses a known version, and any change is a reviewable PR. (#7)
+18. **Hashes are taken over LF-normalised content**, so a file hashes the same on Windows and Linux. (#7)
+19. **`context/` changes only through a pull PR.** A pull also overwrites hand-edited files whose content no longer matches the manifest, so the snapshot cannot drift silently. (#7)
+20. **A stand-in source folder replaces the real systems until connectors exist.** The pull, pin and approval logic is the same either way; each source switches to a real connector when access exists. (#7)
+21. **A pull PR lists the impact:** the existing plans and tests that mention the changed stories or rules, so approvers see what a context change will affect. (#7)
+22. **Agent evals are a known gap.** The Stage 1 gate says agent evals must pass before agent rules or skills change; until they exist, those changes are approved by review only. (#7)

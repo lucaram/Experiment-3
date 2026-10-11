@@ -34,7 +34,10 @@ The previous build of this framework (repo `lucaram/ai-qe-loop`, Stages 1–3) i
 10. **Changing `roles.json` needs two roles: AI QE Lead and Tech Lead.** The file decides who can approve everything else, so one person must not be able to change it alone. (#2)
 11. **Paths are owned before the files exist** (`app/`, `tests/`, `scripts/`, CI, tool config), so every file has an owner from the day it arrives. (#2)
 12. **Until the approval check exists, approvals are PR comments: `Approved as <role>`**, one per required role, before merging. This is recorded but not enforced. A PR comment is preferred over writing the approval in the squash commit message: GitHub shows who wrote a comment, while a commit message is written by whoever merges, so it cannot prove which person approved. Repeating the approval in the commit message as well is fine. (#3)
-    - Known gap: PRs #1–#4 recorded their approvals only in the squash commit message, and #4 recorded only the AI QE Lead, not the QE Engineer its `AGENTS.md` change needed. Nothing blocked the merge, which is the gap the approval check will close.
+    - Known gaps (PRs #1–#4, before this rule was followed):
+      - Approvals were recorded only in the squash commit message, not as PR comments.
+      - #4 recorded only the AI QE Lead; the QE Engineer approval its `AGENTS.md` change needed is missing.
+      - Nothing blocked these merges. The approval check (Stage 3) will close this gap.
 
 ## Context
 

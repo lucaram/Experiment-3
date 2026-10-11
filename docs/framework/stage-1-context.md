@@ -1,6 +1,6 @@
 # Stage 1: Versioned context
 
-Status: **Proposed**. Approvers of this file: Product Owner, Solution Architect, Software Engineer, AI QE Lead.
+Status: **Approved** (proposal #7), not built yet. Approvers of this file: Product Owner, Solution Architect, Software Engineer, AI QE Lead.
 
 Part of the [AI quality framework](README.md). Stage 1 decides what the AI may treat as "correct". Every later stage builds on it: plans and tests are only as good as the context they come from.
 
@@ -18,6 +18,8 @@ The context is everything that defines expected behaviour, plus the AI's own ins
 | Agent rules, agents and skills | `AGENTS.md`, `.claude/` | AI QE Lead + QE Engineer |
 
 Feature-branch PR diffs are also read, but only to work out which areas a change affects. They never define expected behaviour.
+
+Defect and incident history works the same way: it guides risk and focus (e.g. where to plan more tests), never expected behaviour. When an incident shows a requirement was wrong or missing, the fix is a story or business-rule change approved by the Product Owner, not a history entry.
 
 ## How
 
@@ -55,7 +57,9 @@ The implementation PR (approved by the AI QE Lead and a QE Engineer) would add:
 - **Agent evals** ("agent evals must pass"). Until they exist, changes to agent rules and skills are approved by review only. This is a known gap, recorded in `docs/decisions.md`.
 - **Using PR diffs to scope impact.** Added with Stage 2, which is the first stage that needs it.
 
-## Open questions for the approvers
+## Decided in review
 
-1. **Who owns `context/history/`?** This proposal says the AI QE Lead curates it. `roles.json` does not list the folder yet; the implementation PR would add it (that change needs the AI QE Lead and Tech Lead).
-2. **Code-generation instructions** (the rules for AI that writes application code) are in the framework page's Stage 1 gate, approved by the Tech Lead. They have no file yet, because no coding agent exists. Proposal: define their location and owner in the Stage 2 proposal, where coding agents are introduced.
+Both open questions were answered by the AI QE Lead on the proposal PR ([comment](https://github.com/lucaram/Experiment-3/pull/7#issuecomment-6107354864)):
+
+1. **The AI QE Lead owns `context/history/`.** History informs risk and focus only, never expected behaviour (see What). The implementation PR adds the folder to `roles.json`, which needs the AI QE Lead and Tech Lead.
+2. **Code-generation instructions are defined in the Stage 2 proposal**, where coding agents are introduced, with their file location and Tech Lead ownership.

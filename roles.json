@@ -1,0 +1,80 @@
+{
+  "po": {
+    "name": "Product Owner",
+    "users": ["lucaram"],
+    "approves": [
+      "context/stories/**",
+      "context/business-rules/**",
+      "specs/**",
+      "docs/framework/stage-1-context.md",
+      "docs/framework/stage-2-generate.md",
+      "docs/framework/stage-3-evaluate.md",
+      "docs/framework/stage-4-release.md",
+      "docs/framework/stage-6-feedback.md"
+    ]
+  },
+  "architect": {
+    "name": "Solution Architect",
+    "users": ["lucaram"],
+    "approves": [
+      "context/architecture/**",
+      "docs/framework/stage-1-context.md"
+    ]
+  },
+  "engineer": {
+    "name": "Software Engineer",
+    "users": ["lucaram"],
+    "approves": [
+      "context/api/**",
+      "app/**",
+      "docs/framework/stage-1-context.md",
+      "docs/framework/stage-2-generate.md"
+    ]
+  },
+  "tech-lead": {
+    "name": "Tech Lead",
+    "users": ["lucaram"],
+    "approves": [
+      "roles.json",
+      "docs/framework/stage-3-evaluate.md",
+      "docs/framework/stage-4-release.md",
+      "docs/framework/stage-5-observe.md",
+      "docs/framework/stage-6-feedback.md"
+    ]
+  },
+  "qe": {
+    "name": "QE Engineer",
+    "users": ["lucaram"],
+    "approves": [
+      "tests/**",
+      "AGENTS.md",
+      ".claude/**",
+      "docs/framework/stage-2-generate.md",
+      "docs/framework/stage-3-evaluate.md",
+      "docs/framework/stage-6-feedback.md"
+    ]
+  },
+  "ai-qe-lead": {
+    "name": "AI QE Lead",
+    "users": ["lucaram"],
+    "approves": [
+      "docs/framework/**",
+      "docs/decisions.md",
+      "roles.json",
+      "AGENTS.md",
+      "CLAUDE.md",
+      ".claude/**",
+      ".mcp.json",
+      "scripts/**",
+      ".github/**",
+      "package.json",
+      "package-lock.json",
+      "tsconfig.json",
+      "eslint.config.mjs",
+      "playwright.config.ts",
+      "stryker.config.json",
+      ".gitattributes",
+      ".gitignore"
+    ]
+  }
+}
